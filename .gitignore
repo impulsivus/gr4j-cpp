@@ -1,0 +1,14 @@
+*.d
+*.slo
+*.lo
+*.o
+*.obj
+*.gch
+*.pch
+*.pdb
+*.exe
+*.out
+*.app
+*.json
+*.vscode
+*.code-workspace
