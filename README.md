@@ -4,11 +4,11 @@ C++ implementation of GR4J hydrologic rainfall-runoff model.
 Currently a proof of concept project, but will be improved.
 Tested using <https://gitlab.irstea.fr/HYCAR-Hydro/ExcelGR/raw/master/GR4J/GR4J_EN.xlsx> outputs.
 
-# Dependencies
+## Dependencies
 
-<https://github.com/gabime/spdlog> - included in the includes directory.
+<https://github.com/gabime/spdlog> - Logging library.
 
-# Usage
+## Usage
 
 gr4j.exe --precipitation pathToPrecipitationData --pet pathToPETData --discharge pathToDischargeData --parameters pathToParametersData --out RsquaredOutputFile
 
@@ -42,7 +42,7 @@ Contents of --param:
 | 5 | Area of catchment (square km)  |
 | 6 | Value of S  |
 
-# Compiling
+## Compiling
 
 With Visual C++ 19:
 
