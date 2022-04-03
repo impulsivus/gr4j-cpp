@@ -4,16 +4,17 @@
 
 int main(int argc, char *argv[])
 {
-    printf("Starting\n");
     char *_prec, *_pet, *_disc, *_param, *_out;
     char *_x1, *_x2, *_x3, *_x4, *_s, *_area;
     char* current_arg, *next_arg;
+    bool timer_enabled = false;
 
     int _prec_found = 0;
     int _pet_found = 0;
     int _disc_found = 0;
     int _param_found = 0;
     int _out_found = 0;
+
 
 
     int satisfied = 0;
@@ -28,6 +29,7 @@ int main(int argc, char *argv[])
             "--discharge pathToDischargeData "
             "--parameters pathToParametersData "
             "--out RsquaredOutputFile\n"
+            "[optional] --timer - Outputs the total execution time, which is useful for benchmarking.\n",
             "\n"
             "Example:\n"
             "%s --precipitation ./precipitation.txt "
@@ -162,6 +164,10 @@ int main(int argc, char *argv[])
                 return 1;
             }
         }
+        if(strcmp(current_arg, "--timer") == 0) {
+            printf("Timer enabled\n");
+            timer_enabled = true;
+        }
     }
 
     if(satisfied == 6 && _param_found) {
@@ -175,8 +181,10 @@ int main(int argc, char *argv[])
     }
 
     
-
-    clock_t t, t1 = clock();
+    clock_t t, t1;
+    if(timer_enabled) {
+        t, t1 = clock();
+    }
     GR4J gr4j;
     {
         FileReader precipitation_data_file(_prec);
@@ -245,7 +253,10 @@ int main(int argc, char *argv[])
         fprintf(file, "%.20f", gr4j.getR_squared());
         fclose(file);
     }
-    t1 = clock() - t1;
-    printf("Total time taken: %g seconds\n", ((float)t1) / CLOCKS_PER_SEC);
-    printf("Total time in milliseconds: %g\n", (float)t1);
+    if(timer_enabled)
+    {
+        t1 = clock() - t1;
+        printf("Total time taken: %g seconds\n", ((float)t1) / CLOCKS_PER_SEC);
+        printf("Total time in milliseconds: %g\n", (float)t1);
+    }
 }
