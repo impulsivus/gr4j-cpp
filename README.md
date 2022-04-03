@@ -4,10 +4,6 @@ C++ implementation of GR4J hydrologic rainfall-runoff model.
 Currently a proof of concept project, but will be improved.
 Tested using <https://gitlab.irstea.fr/HYCAR-Hydro/ExcelGR/raw/master/GR4J/GR4J_EN.xlsx> outputs.
 
-## Dependencies
-
-<https://github.com/gabime/spdlog> - Logging library.
-
 ## Usage
 
 gr4j.exe --precipitation pathToPrecipitationData --pet pathToPETData --discharge pathToDischargeData --parameters pathToParametersData --out RsquaredOutputFile

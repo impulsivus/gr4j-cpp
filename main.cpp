@@ -1,10 +1,10 @@
-#include <spdlog/spdlog.h>
 #include "FileReader.h"
 #include "GR4J.h"
 
+
 int main(int argc, char *argv[])
 {
-    spdlog::info("Starting");
+    printf("Starting\n");
     char *_prec, *_pet, *_disc, *_param, *_out;
     char *_x1, *_x2, *_x3, *_x4, *_s, *_area;
     char* current_arg, *next_arg;
@@ -20,10 +20,10 @@ int main(int argc, char *argv[])
 
     if (argc == 1)
     {
-        spdlog::error(
+        printf(
             "No arguments speficied.\n"
             "Usage:\n"
-            "{} --precipitation pathToPrecipitationData "
+            "%s --precipitation pathToPrecipitationData "
             "--pet pathToPETData "
             "--discharge pathToDischargeData "
             "--parameters pathToParametersData "
@@ -47,7 +47,7 @@ int main(int argc, char *argv[])
             "\n"
             "Contents of --out: Outputs the result of Rsquared method.\n"
             "\n"
-            "Contents of --param:\nLine\tValue\n1\tX1 Value\n2\tX2 value\n3\tX3 value\n4\tX4 value\n5\tArea of catchment (square km)\n6\tValue of S",
+            "Contents of --param:\nLine\tValue\n1\tX1 Value\n2\tX2 value\n3\tX3 value\n4\tX4 value\n5\tArea of catchment (square km)\n6\tValue of S\n",
             argv[0]);
         return 1;
     }
@@ -61,7 +61,7 @@ int main(int argc, char *argv[])
                 _x1 = next_arg;
                 satisfied++;
             } else {
-                spdlog::error("No value specified for -x1");
+                printf("No value specified for -x1\n");
                 return 1;
             }
         }
@@ -70,7 +70,7 @@ int main(int argc, char *argv[])
                 _x2 = next_arg;
                 satisfied++;
             } else {
-                spdlog::error("No value specified for -x2");
+                printf("No value specified for -x2\n");
                 return 1;
             }
         }
@@ -79,7 +79,7 @@ int main(int argc, char *argv[])
                 _x3 = next_arg;
                 satisfied++;
             } else {
-                spdlog::error("No value specified for -x3");
+                printf("No value specified for -x3\n");
                 return 1;
             }
         }
@@ -88,7 +88,7 @@ int main(int argc, char *argv[])
                 _x4 = next_arg;
                 satisfied++;
             } else {
-                spdlog::error("No value specified for -x4");
+                printf("No value specified for -x4\n");
                 return 1;
             }
         }
@@ -97,7 +97,7 @@ int main(int argc, char *argv[])
                 _s = next_arg;
                 satisfied++;
             } else {
-                spdlog::error("No value specified for -s");
+                printf("No value specified for -s\n");
                 return 1;
             }
         }
@@ -106,7 +106,7 @@ int main(int argc, char *argv[])
                 _area = next_arg;
                 satisfied++;
             } else {
-                spdlog::error("No value specified for -area");
+                printf("No value specified for -area\n");
                 return 1;
             }
         }
@@ -115,7 +115,7 @@ int main(int argc, char *argv[])
                 _prec = next_arg;
                 _prec_found = 1;
             } else {
-                spdlog::error("No value specified for -precipitation");
+                printf("No value specified for -precipitation\n");
                 return 1;
             }
         }
@@ -124,7 +124,7 @@ int main(int argc, char *argv[])
                 _pet = next_arg;
                 _pet_found = 1;
             } else {
-                spdlog::error("No value specified for -pet");
+                printf("No value specified for -pet\n");
                 return 1;
             }
         }
@@ -133,7 +133,7 @@ int main(int argc, char *argv[])
                 _disc = next_arg;
                 _disc_found = 1;
             } else {
-                spdlog::error("No value specified for -discharge");
+                printf("No value specified for -discharge\n");
                 return 1;
             }
         }
@@ -142,7 +142,7 @@ int main(int argc, char *argv[])
                 _param = next_arg;
                 _param_found = 1;
             } else {
-                spdlog::error("No value specified for -parameters");
+                printf("No value specified for -parameters\n");
                 return 1;
             }
         }
@@ -151,19 +151,19 @@ int main(int argc, char *argv[])
                 _out = next_arg;
                 _out_found = 1;
             } else {
-                spdlog::error("No value specified for -out");
+                printf("No value specified for -out\n");
                 return 1;
             }
         }
     }
 
     if(satisfied == 6 && _param_found) {
-        spdlog::error("Can not set parameters in arguments and specify parameters file at the same time");
+        printf("Can not set parameters in arguments and specify parameters file at the same time\n");
         return 1;
     }
 
     if((satisfied != 6 && satisfied != 0) || !_prec_found || !_pet_found || !_disc_found || !_out_found) {
-        spdlog::error("Missing arguments.");
+        printf("Missing arguments.\n");
         return 1;
     }
 
@@ -204,11 +204,11 @@ int main(int argc, char *argv[])
             int param_data_size = param_data.size();
             if (prec_data_size != pet_data_size || prec_data_size != disc_data_size)
             {
-                spdlog::error("Data files have different sizes");
-                spdlog::info("Precipitation data size: {}", prec_data_size);
-                spdlog::info("PET data size: {}", pet_data_size);
-                spdlog::info("Discharge data size: {}", disc_data_size);
-                spdlog::info("Param data size: {}", param_data_size);
+                printf("Data files have different sizes\n");
+                printf("Precipitation data size: %i\n", prec_data_size);
+                printf("PET data size: %i\n", pet_data_size);
+                printf("Discharge data size: %i\n", disc_data_size);
+                printf("Param data size: %i\n", param_data_size);
                 return 1;
             }
         }
@@ -239,6 +239,6 @@ int main(int argc, char *argv[])
         fclose(file);
     }
     t1 = clock() - t1;
-    spdlog::info("Total time taken: {} seconds", ((float)t1) / CLOCKS_PER_SEC);
-    spdlog::info("Total time in milliseconds: {}", t1);
+    printf("Total time taken: %g seconds\n", ((float)t1) / CLOCKS_PER_SEC);
+    printf("Total time in milliseconds: %g\n", (float)t1);
 }

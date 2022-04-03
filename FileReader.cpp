@@ -1,4 +1,3 @@
-#include <spdlog/spdlog.h>
 #include "FileReader.h"
 
 FileReader::FileReader(char *filename)
@@ -10,7 +9,7 @@ FILE *FileReader::openFile()
     FILE *file = fopen(filename, "r");
     if (file == NULL)
     {
-        spdlog::error("Could not open file {}", filename);
+        printf("Could not open file %s\n", filename);
         return NULL;
     }
     return file;

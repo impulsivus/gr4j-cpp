@@ -84,7 +84,7 @@ void GR4J::setX4(double X4)
 {
     if (X4 < 0.5)
     {
-        spdlog::warn("X4 must be greater than 0.5. Accepting X4 = 0.5...");
+        printf("X4 must be greater than 0.5. Accepting X4 = 0.5...\n");
         X4 = 0.5;
     }
     _X4 = X4;
