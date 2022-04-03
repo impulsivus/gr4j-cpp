@@ -1,6 +1,6 @@
 #include "FileReader.h"
 #include "GR4J.h"
-
+#include <string> 
 
 int main(int argc, char *argv[])
 {
@@ -29,6 +29,13 @@ int main(int argc, char *argv[])
             "--parameters pathToParametersData "
             "--out RsquaredOutputFile\n"
             "\n"
+            "Example:\n"
+            "%s --precipitation ./precipitation.txt "
+            "--pet ./pet.txt "
+            "--discharge ./discharge.txt "
+            "--parameters ./parameters.txt "
+            "--out ./Rsquared.txt\n"
+            "\n"
             "\n"
             "If you want to specify the parameters in the command line, use the following arguments:\n"
             "-x1 x1\n"
@@ -48,7 +55,7 @@ int main(int argc, char *argv[])
             "Contents of --out: Outputs the result of Rsquared method.\n"
             "\n"
             "Contents of --param:\nLine\tValue\n1\tX1 Value\n2\tX2 value\n3\tX3 value\n4\tX4 value\n5\tArea of catchment (square km)\n6\tValue of S\n",
-            argv[0]);
+            argv[0], argv[0]);
         return 1;
     }
     for (size_t i = 1; i < argc; i++)
