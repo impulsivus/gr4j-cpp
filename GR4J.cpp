@@ -67,8 +67,7 @@ void GR4J::setX1(double X1)
 {
     _X1 = X1;
     _S.clear();
-    //_S.push_back(_X1 * 0.7);
-    _S.push_back(325);
+    _S.push_back(_X1 * 0.7);
 }
 void GR4J::setX2(double X2)
 {
