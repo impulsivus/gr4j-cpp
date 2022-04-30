@@ -28,5 +28,6 @@ std::vector<long double> FileReader::readFile()
     {
         data.emplace_back(q);
     }
+    closeFile(file);
     return data;
 }
